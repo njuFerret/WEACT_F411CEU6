@@ -6,7 +6,10 @@
 
 // 1 = use internal flash (512 KByte)
 // 0 = use onboard SPI flash (4 MByte) Winbond W25Q32
-#define MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE (1)
+#define MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE (0)
+#if ( MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE == 0 )
+	#define MICROPY_HW_SPIFLASH_ENABLE_CACHE (1)
+#endif
 
 #define MICROPY_HW_HAS_SWITCH       (1)
 #define MICROPY_HW_HAS_FLASH        (1)
@@ -93,9 +96,9 @@
 // The board ships without SPI flash installed. You need to add your own.
 // Supports: W25Q16, W25Q32, W25Q64, W25Q128
 // #define MICROPY_HW_SPIFLASH_SIZE_BITS (16 * 1024 * 1024) // W25Q16 - 16 Mbit (2 MByte)
-#define MICROPY_HW_SPIFLASH_SIZE_BITS (32 * 1024 * 1024) // W25Q32 - 32 Mbit (4 MByte)
+//#define MICROPY_HW_SPIFLASH_SIZE_BITS (32 * 1024 * 1024) // W25Q32 - 32 Mbit (4 MByte)
 // #define MICROPY_HW_SPIFLASH_SIZE_BITS (64 * 1024 * 1024) // W25Q64 - 64 Mbit (8 MByte)
-// #define MICROPY_HW_SPIFLASH_SIZE_BITS (128 * 1024 * 1024) // W25Q128 - 128 Mbit (16 MByte)
+ #define MICROPY_HW_SPIFLASH_SIZE_BITS (128 * 1024 * 1024) // W25Q128 - 128 Mbit (16 MByte)
 
 #define MICROPY_HW_SPIFLASH_CS      (pin_A4)
 #define MICROPY_HW_SPIFLASH_SCK     (pin_A5)
